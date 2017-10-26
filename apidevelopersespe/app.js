@@ -13,6 +13,7 @@ var config = require('./cfg');
 var port = process.env.PORT || 3333;
 
 mongoose.Promise = global.Promise;
+mongoose.connect(config.database, { useMongoClient: true })
   .then(() => {
     console.log('Conexion MongoDB exitosa..!!')
   })
