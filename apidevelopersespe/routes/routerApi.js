@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 var userController = require('../controllers/user');
 var appController = require('../controllers/app');
+//var tokenController = require('../controllers/token');
 
 //USERS
 
@@ -33,6 +34,8 @@ router.get('/apps', appController.getApps);
 //select * from apps where apps.id = ?
 router.get('/app/:id', appController.getApp);
 
-
+//token
+//inser
+//router.post('/app', tokenController.saveToken);
 
 module.exports = router;
