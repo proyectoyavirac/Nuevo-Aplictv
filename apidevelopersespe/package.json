@@ -1,0 +1,19 @@
+{
+  "name": "apidevelopersespe",
+  "version": "0.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.15.5",
+    "jsonwebtoken": "^8.1.0",
+    "md5": "^2.2.1",
+    "mongoose": "^4.12.4",
+    "mongoose-models": "^0.3.1",
+    "morgan": "^1.9.0",
+    "randomstring": "^1.1.5",
+    "serve-favicon": "~2.4.5"
+  }
+}
