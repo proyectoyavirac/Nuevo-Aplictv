@@ -79,6 +79,12 @@ var TokenSchema = new Schema({
 var Token = mongoose.model('Token', TokenSchema);
 
 var AuditSchema = new Schema({
+    className: String,
+    codigo: String,
+    application: {
+        $ref: String,
+        $id: String
+    },
     token: String,
     date: Date,
     search: String,

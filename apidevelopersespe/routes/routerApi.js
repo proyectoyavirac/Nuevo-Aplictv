@@ -5,7 +5,7 @@ var router = express.Router();
 var userController = require('../controllers/user');
 var appController = require('../controllers/app');
 var tokenController = require('../controllers/token');
-
+var auditController = require('../controllers/audit');
 //USERS
 
 //authentification token
@@ -35,7 +35,12 @@ router.get('/apps', appController.getApps);
 router.get('/app/:id', appController.getApp);
 
 //token
-//inser
+//insert
 router.post('/token', tokenController.saveToken);
+
+//Audit
+//Insert
+router.post('/audit', auditController.saveAudit);
+
 
 module.exports = router;
