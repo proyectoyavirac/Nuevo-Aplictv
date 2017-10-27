@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router();
 var userController = require('../controllers/user');
 var appController = require('../controllers/app');
-//var tokenController = require('../controllers/token');
+var tokenController = require('../controllers/token');
 
 //USERS
 
@@ -36,6 +36,6 @@ router.get('/app/:id', appController.getApp);
 
 //token
 //inser
-//router.post('/app', tokenController.saveToken);
+router.post('/token', tokenController.saveToken);
 
 module.exports = router;

@@ -59,13 +59,22 @@ var AppSchema = new Schema({
     lastChange: Date
 });
 
+var App = mongoose.model('App', AppSchema);
 
 var TokenSchema = new Schema({
+    className: String,
+    codigo: String,
+    application: {
+        $ref: String,
+        $id: String
+    },
     hash: String,
     date_in: Date,
     date_out: Date,
     forever: Boolean,
-    flag: Number
+    flag: Number,
+    creationDate: Date,
+    lastChange: Date
 });
 var Token = mongoose.model('Token', TokenSchema);
 
@@ -74,21 +83,20 @@ var AuditSchema = new Schema({
     date: Date,
     search: String,
     ip: String,
-    flag: Number
+    flag: Number,
+    creationDate: Date,
+    lastChange: Date
 });
 var Audit = mongoose.model('Audit', AuditSchema);
 
 
 
 
-
-
-var App = mongoose.model('App', AppSchema);
-
-
 module.exports = {
     Credential,
     User,
-    App
+    App,
+    Token,
+    Audit
 
 }
