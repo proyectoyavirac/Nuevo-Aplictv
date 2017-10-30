@@ -49,7 +49,7 @@ var User = mongoose.model('User', UserSchema);
 var AppSchema = new Schema({
     className: String,
     codigo: String,
-    developer: { type: Schema.Types.ObjectId, ref: 'User' },
+    developer: { type: Schema.Types.ObjectId, ref: 'user' },
     name: String,
     description: String,
     client_id: String,
@@ -65,8 +65,8 @@ var TokenSchema = new Schema({
     className: String,
     codigo: String,
     application: {
-        $ref: String,
-        $id: String
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     },
     hash: String,
     date_in: Date,

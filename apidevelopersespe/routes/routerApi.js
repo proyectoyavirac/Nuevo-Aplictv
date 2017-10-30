@@ -37,10 +37,26 @@ router.get('/app/:id', appController.getApp);
 //token
 //insert
 router.post('/token', tokenController.saveToken);
+//update
+router.put('/token/:id', tokenController.updateToken);
+//delete
+router.delete('/token/:id', tokenController.deleteToken);
+//select * from apps
+router.get('/tokens', tokenController.getTokens);
+//select * from apps where token.id =?
+router.get('/token/:id', tokenController.getToken);
 
 //Audit
 //Insert
 router.post('/audit', auditController.saveAudit);
+//update
+router.put('/audit/:id', auditController.updateAudit);
+//delete
+router.delete('/Audit/:id', auditController.deleteAudit);
+//select * from apps
+router.get('/audits', auditController.getAudits);
+//select * from apps where apps.id = ?
+router.get('/audit/:id', auditController.getAudit);
 
 
 module.exports = router;

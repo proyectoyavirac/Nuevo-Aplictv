@@ -8,6 +8,7 @@ var md5 = require('md5');
 function saveApp(req, res) {
     var app = new App();
     var params = req.body;
+
     if (params.name && params.description) {
         app.className = 'ec.edu.espe.developers.espe.mongo.model.App';
         var count = App.count({}).exec((err, value) => {
@@ -21,9 +22,10 @@ function saveApp(req, res) {
 
         app.name = params.name;
         app.description = params.description;
+        app.developer = params.developer;
 
         app.client_id = md5(app.developer.codigo);
-        app.client_id = md5(app.name + app.codigo);
+        app.client_secret = md5(app.name + app.codigo);
 
         app.flag = 1;
         app.cretionDate = Date.now;
