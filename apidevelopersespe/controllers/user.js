@@ -5,6 +5,7 @@ var credential = modeldb.Credential;
 var jwt = require('jsonwebtoken');
 var randomstring = require("randomstring");
 var config = require('../cfg');
+var mongoose = require('mongoose');
 
 //POST-AUTH
 function authUserApp(req, res) {
@@ -44,7 +45,7 @@ function saveUser(req, res) {
     var params = req.body;
     if (params.local) {
         user.className = 'ec.edu.espe.developers.espe.mongo.model.User';
-        user.codigo = 'USER' + randomstring.generate(10).toUpperCase();//mejoara control
+        user.codigo = 'USER' + randomstring.generate(10).toUpperCase(); //mejoara control
         user.local = params.local;
         user.facebook = params.facebook;
         user.twitter = params.twitter;
@@ -52,6 +53,8 @@ function saveUser(req, res) {
         user.flag = 1;
         user.creationDate = new Date();
         user.lastChange = new Date();
+
+        user._id = new mongoose.Types.ObjectId();
         user.save((err, userStored) => {
             if (err) {
                 res.status(500).send({

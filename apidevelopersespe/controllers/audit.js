@@ -7,44 +7,7 @@ var randomstring = require("randomstring");
 var config = require('../cfg');
 
 
-//POST
-function saveAudit(req, res) {
-    var audit = new Audit();
-    var params = req.body;
-    if (params.application) {
-        audit.className = 'ec.edu.espe.developers.espe.mongo.model.User';
-        audit.codigo = 'Audit' + randomstring.generate(10).toUpperCase(); //mejoara control
-        audit.application = params.application;
-        audit.flag = 1;
-        audit.creationDate = new Date();
-        audit.lastChange = new Date();
-        audit.date = new Date();
-        audit.ip = '10.10.10.10';
-        audit.search = 'http://aplicaciones.espe.edu';
-        audit.save((err, auditStored) => {
-            if (err) {
-                res.status(500).send({
-                    message: 'Error en el servidor.'
-                });
-            } else {
-                if (auditStored) {
-                    res.status(200).send({
-                        audit: auditStored
-                    });
-                } else {
-                    res.status(200).send({
-                        message: 'No se ha guardado la user.'
-                    });
-                }
-            }
-        });
 
-    } else {
-        res.status(200).send({
-            message: 'Por favor complete los campos requeridos.'
-        });
-    }
-};
 
 //GET
 function getAudits(req, res) {
@@ -136,7 +99,7 @@ function deleteAudit(req, res) {
 
 module.exports = {
 
-    saveAudit,
+    //  saveAudit,
     updateAudit,
     deleteAudit,
     getAudits,

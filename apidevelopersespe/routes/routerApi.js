@@ -36,11 +36,11 @@ router.get('/app/:id', appController.getApp);
 
 //token
 //insert
-router.post('/token', tokenController.saveToken);
+//router.post('/token', tokenController.saveToken);
 //update
 router.put('/token/:id', tokenController.updateToken);
 //delete
-router.delete('/token/:id', tokenController.deleteToken);
+//router.delete('/token/:id', tokenController.deleteToken);
 //select * from apps
 router.get('/tokens', tokenController.getTokens);
 //select * from apps where token.id =?
@@ -48,7 +48,7 @@ router.get('/token/:id', tokenController.getToken);
 
 //Audit
 //Insert
-router.post('/audit', auditController.saveAudit);
+//router.post('/audit', auditController.saveAudit);
 //update
 router.put('/audit/:id', auditController.updateAudit);
 //delete
