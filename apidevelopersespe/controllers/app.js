@@ -1,44 +1,44 @@
 'use strict'
 var modeldb = require('../models/model');
 var App = modeldb.App;
+var User = modeldb.User;
 var randomstring = require("randomstring");
 var md5 = require('md5');
+var mongoose = require('mongoose');
 
 //POST
 function saveApp(req, res) {
     var app = new App();
+    var userApp = new User();
     var params = req.body;
-
     if (params.name && params.description) {
         app.className = 'ec.edu.espe.developers.espe.mongo.model.App';
-        var count = App.count({}).exec((err, value) => {
-            if (err) {
-                console.log('Error en el servidor. ' + err);
-            }
-        });
-
-        var code = randomstring.generate(6);
-        app.codigo = 'APP' + count + code.toUpperCase();
-
+        var code = randomstring.generate(8);
+        app.codigo = 'APP' + code.toUpperCase();
+        console.log('codigo ->' + app.codigo);
+        console.log('id params ->' + params.developer);
+        userApp._id = new mongoose.Types.ObjectId(params.developer);
+        app.developer = userApp;
+        console.log('id user -> ' + app.developer);
         app.name = params.name;
         app.description = params.description;
-        app.developer = params.developer;
-
-        app.client_id = md5(app.developer.codigo);
+        app.client_id = md5(app.name + app.codigo);
         app.client_secret = md5(app.name + app.codigo);
-
         app.flag = 1;
-        app.cretionDate = Date.now;
-        app.lastChange = Date.now;
 
+        app.cretionDate = Date.now();
+        app.lastChange = Date.now();
+
+        console.log(app);
         app.save((err, appStored) => {
             if (err) {
                 res.status(500).send({
-                    message: 'Error en el servidor.'
+                    message: 'Error en el servidor.' + err.toString()
                 });
             } else {
                 if (appStored) {
                     res.status(200).send({
+
                         app: appStored
                     });
                 } else {
