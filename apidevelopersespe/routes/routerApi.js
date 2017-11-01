@@ -6,6 +6,10 @@ var userController = require('../controllers/user');
 var appController = require('../controllers/app');
 var tokenController = require('../controllers/token');
 var auditController = require('../controllers/audit');
+var pass = require('../controllers/passlocal');
+
+//router.post('/login',pass.passport);
+
 //USERS
 
 //authentification token
@@ -19,7 +23,7 @@ router.delete('/user/:id', userController.deleteUser);
 //select * from users
 router.get('/users', userController.getUsers);
 //select * from users where users.id = ?
-router.get('/user/:id', userController.getUser);
+router.get('/user/:name', userController.getName);
 
 //APPS
 

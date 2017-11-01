@@ -1,11 +1,16 @@
 'use strict'
 var modeldb = require('../models/model');
 var User = modeldb.User;
+var userNameLocal = modeldb.User.local;
 var credential = modeldb.Credential;
 var jwt = require('jsonwebtoken');
 var randomstring = require("randomstring");
 var config = require('../cfg');
 var mongoose = require('mongoose');
+
+
+
+
 
 //POST-AUTH
 function authUserApp(req, res) {
@@ -101,6 +106,29 @@ function getUsers(req, res) {
     });
 };
 
+//get name
+function getName(req, res) {
+
+    User.find({ 'local.name': req.params.name }, function(err, user) {
+        if (err) {
+            res.status(500).send({
+                message: 'Error en el servidor.'
+            });
+        } else {
+            if (user) {
+                res.status(200).send({
+                    user
+                });
+            } else {
+                res.status(404).send({
+                    message: 'No hay users.'
+                });
+            }
+        }
+
+    })
+};
+
 //GET
 function getUser(req, res) {
     var userId = req.params.id;
@@ -171,6 +199,7 @@ function deleteUser(req, res) {
 module.exports = {
     authUserApp,
     saveUser,
+    getName,
     updateUser,
     deleteUser,
     getUsers,
