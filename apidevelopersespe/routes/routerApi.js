@@ -23,7 +23,7 @@ router.delete('/user/:id', userController.deleteUser);
 //select * from users
 router.get('/users', userController.getUsers);
 //select * from users where users.id = ?
-router.get('/user/:name', userController.getName);
+router.get('/user/:name,:password', userController.getName);
 
 //APPS
 

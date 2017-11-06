@@ -109,20 +109,29 @@ function getUsers(req, res) {
 //get name
 function getName(req, res) {
 
-    User.find({ 'local.name': req.params.name }, function(err, user) {
+    jsonObject = JSON.stringify(data);
+    console.log(jsonObject);
+
+    User.findOne({
+        'local.name': req.params.name,
+        'local.password': req.params.password
+    }, function (err, user) {
         if (err) {
             res.status(500).send({
                 message: 'Error en el servidor.'
             });
         } else {
             if (user) {
-                res.status(200).send({
-                    user
-                });
+                res.status(200).send(
+                    { json(user) }
+                );
+                console.log(user);
+               
             } else {
                 res.status(404).send({
-                    message: 'No hay users.'
+                    message: 'Usuario no encontrado'
                 });
+
             }
         }
 
@@ -141,7 +150,10 @@ function getUser(req, res) {
             if (user) {
                 res.status(200).send({
                     user
-                });
+
+                }
+                )
+
             } else {
                 res.status(404).send({
                     message: 'No se encontrado.'
