@@ -109,9 +109,6 @@ function getUsers(req, res) {
 //get name
 function getName(req, res) {
 
-    jsonObject = JSON.stringify(data);
-    console.log(jsonObject);
-
     User.findOne({
         'local.name': req.params.name,
         'local.password': req.params.password
@@ -123,10 +120,10 @@ function getName(req, res) {
         } else {
             if (user) {
                 res.status(200).send(
-                    { json(user) }
-                );
+                    { user }
+                )
                 console.log(user);
-               
+
             } else {
                 res.status(404).send({
                     message: 'Usuario no encontrado'
