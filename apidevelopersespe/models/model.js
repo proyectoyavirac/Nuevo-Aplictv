@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var bcrypt = require('bcrypt-nodejs');
 
 var CredentialSchema = new Schema({
     descripcion: String,
@@ -45,7 +46,16 @@ var UserSchema = new Schema({
     lastChange: Date
 });
 
+UserSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(9), null);
+}
+UserSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
+}
+
 var User = mongoose.model('User', UserSchema);
+
+
 
 var AppSchema = new Schema({
     className: String,

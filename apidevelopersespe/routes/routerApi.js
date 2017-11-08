@@ -6,10 +6,14 @@ var userController = require('../controllers/user');
 var appController = require('../controllers/app');
 var tokenController = require('../controllers/token');
 var auditController = require('../controllers/audit');
-var pass = require('../controllers/passlocal');
+var passlocalController = require('../controllers/passport');
+
 
 //router.post('/login',pass.passport);
+router.post('/login', passlocalController.authenticate('local', {
+    // successRedirect: '/documentation'
 
+}));
 //USERS
 
 //authentification token
@@ -62,5 +66,9 @@ router.get('/audits', auditController.getAudits);
 //select * from apps where apps.id = ?
 router.get('/audit/:id', auditController.getAudit);
 
+//passlocal
+//procesamiento password
+
+//router.post('/loginpass', passlocalController.passport)
 
 module.exports = router;

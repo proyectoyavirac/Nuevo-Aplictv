@@ -52,6 +52,7 @@ function saveUser(req, res) {
         user.className = 'ec.edu.espe.developers.espe.mongo.model.User';
         user.codigo = 'USER' + randomstring.generate(10).toUpperCase(); //mejoara control
         user.local = params.local;
+        user.local.password = user.generateHash(params.local.password);
         user.facebook = params.facebook;
         user.twitter = params.twitter;
         user.google = params.google;
@@ -85,6 +86,7 @@ function saveUser(req, res) {
     }
 };
 
+
 //GET
 function getUsers(req, res) {
     User.find({}).exec((err, users) => {
@@ -112,16 +114,14 @@ function getName(req, res) {
     User.findOne({
         'local.name': req.params.name,
         'local.password': req.params.password
-    }, function (err, user) {
+    }, function(err, user) {
         if (err) {
             res.status(500).send({
                 message: 'Error en el servidor.'
             });
         } else {
             if (user) {
-                res.status(200).send(
-                    { user }
-                )
+                res.status(200).send({ user })
                 console.log(user);
 
             } else {
@@ -148,8 +148,7 @@ function getUser(req, res) {
                 res.status(200).send({
                     user
 
-                }
-                )
+                })
 
             } else {
                 res.status(404).send({
